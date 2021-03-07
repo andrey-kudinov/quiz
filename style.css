@@ -126,6 +126,7 @@ a {
   box-sizing: border-box;
   color: inherit;
   text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -206,7 +207,7 @@ b {
 }
 .content-wrap {
   grid-column: main;
-  padding-top: 45px;
+  padding: 45px 0;
 }
 .answers {
   width: 50%;
@@ -214,7 +215,7 @@ b {
 
 @media screen and (max-width: 768px) {
   .content-wrap {
-    padding-top: 30px;
+    padding: 30px 0;
   }
   .answers {
     width: 100%;
@@ -2951,7 +2952,6 @@ html[lang="uz"] .dashboard-language__current-image {
 
 .intensive-test__container {
   width: 100%;
-  margin-bottom: 96px;
 }
 
 .intensive-test__title {
@@ -3336,7 +3336,6 @@ html[lang="uz"] .dashboard-language__current-image {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 96px;
 }
 
 .menu-item__text {
