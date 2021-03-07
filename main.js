@@ -29,31 +29,32 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function start(response) {
-  step = response;
-  let step_step = 0
-  shuffle(step);
-  questions_step2 = step;
+  let test = response;
+  let test_step = 0;
+  shuffle(test);
+  test = test.slice(0,5)
+  questions_step2 = test;
   let answerHTML = "";
   let $class = "d-block";
   let cardClass = "intensive-puzzle__item-first_active";
 
-  document.querySelectorAll('.step2-item__title-js')[0].textContent = `${step[0].category}`;
-  document.querySelectorAll('.step2-item__title-js')[1].textContent = `Вопросы из категории ${step[0].category}`;
-  for (let i = 0; i < step.length; i++) {
+  document.querySelectorAll(".step2-item__title-js")[0].textContent = `${test[0].category}`;
+  document.querySelectorAll(".step2-item__title-js")[1].textContent = `Вопросы из категории ${test[0].category}`;
+  for (let i = 0; i < test.length; i++) {
     if (i !== 0) {
       $class = "d-none";
       cardClass = "";
     }
-    let answersArray = [step[i].correct_answer, step[i].incorrect_answers[0], step[i].incorrect_answers[1], step[i].incorrect_answers[2]];
+    let answersArray = [test[i].correct_answer, test[i].incorrect_answers[0], test[i].incorrect_answers[1], test[i].incorrect_answers[2]];
 
     shuffle(answersArray);
     let answers = "";
-    let question = step[i];
+    let question = test[i];
     for (let j = 0; j < 4; j++) {
       let answer = answersArray[j];
       let check = "";
       // let check = `<img class="intensive-test__input-check-error" src="./images/intensive-test-input-error.svg" alt="">`;
-      if (answer == step[i].correct_answer) {
+      if (answer == test[i].correct_answer) {
         // check = `<img class="intensive-test__input-img intensive-test__input-check-checked" src="./images/intensive-test-input-checked.svg" alt="">`;
       } else {
         // check = `<img class="intensive-test__input-img intensive-test__input-check-error" src="./images/intensive-test-input-error.svg" alt="">`;
@@ -115,7 +116,7 @@ function start(response) {
         //     question.querySelectorAll(".intensive-test__input-container")[i].classList.add("question-container-js");
         //   }
         // }
-        if (answer.textContent == step[question_id].correct_answer) {
+        if (answer.textContent == test[question_id].correct_answer) {
           correctAnswersCounter++;
           document.querySelector(".step2-container__item-result_num").textContent = correctAnswersCounter;
           document.querySelector(".step2-container__progress-caption").textContent = `${Math.round((correctAnswersCounter * 100) / 5)}%`;
@@ -125,7 +126,7 @@ function start(response) {
           // comment.classList.add("question-container__comment_true");
           // comment.innerText = 'Верно!';
           comment.classList.add("step2-question-container__comment");
-          comment.innerHTML = `<div class="step2-question-container__comment-title">Верно!</div><div class="question-container__comment-text">Вопрос категории ${step[question_id].difficulty}</div>`;
+          comment.innerHTML = `<div class="step2-question-container__comment-title">Верно!</div><div class="question-container__comment-text">Вопрос категории ${test[question_id].difficulty}</div>`;
           question.querySelectorAll(".intensive-test__input-container").forEach(function (item, index) {
             item.classList.add("intensive-test__input-container_disable");
           });
@@ -140,7 +141,7 @@ function start(response) {
           //         document.querySelector(".step2-end").style.display = "block";
           //     }
           // }
-          if (step_step == 4 && correctAnswersCounter != 5) {
+          if (test_step == 4 && correctAnswersCounter != 5) {
             document.querySelector(".step2__button_green").disabled = true;
           } else {
             document.querySelector(".step2__button_green").disabled = false;
@@ -171,18 +172,19 @@ function start(response) {
         item.classList.remove("d-block");
         item.classList.add("d-none");
       });
-      step_step++;
-      if (step_step == 4 && correctAnswersCounter != 5) {
+      test_step++;
+      if (test_step == 4 && correctAnswersCounter != 5) {
         document.querySelector(".step2__button_green").disabled = true;
+        document.querySelector(".step2__button_green").textContent = "Завершить тест";
       } else {
         document.querySelector(".step2__button_green").disabled = false;
       }
-      if (step_step == 5) {
+      if (test_step == 5) {
         document.querySelector(".step2-start").style.display = "none";
         document.querySelector(".step2-end").style.display = "block";
       } else {
-        document.querySelector(".question-container[data-id='" + step_step + "']").classList.remove("d-none");
-        document.querySelector(".question-container[data-id='" + step_step + "']").classList.add("d-block");
+        document.querySelector(".question-container[data-id='" + test_step + "']").classList.remove("d-none");
+        document.querySelector(".question-container[data-id='" + test_step + "']").classList.add("d-block");
         document.querySelector(".step2__button_test-back").disabled = false;
       }
     };
@@ -192,14 +194,15 @@ function start(response) {
         item.classList.remove("d-block");
         item.classList.add("d-none");
       });
-      step_step--;
-      document.querySelector(".question-container[data-id='" + step_step + "']").classList.remove("d-none");
-      document.querySelector(".question-container[data-id='" + step_step + "']").classList.add("d-block");
-      if (step_step == 0) {
+      test_step--;
+      document.querySelector(".question-container[data-id='" + test_step + "']").classList.remove("d-none");
+      document.querySelector(".question-container[data-id='" + test_step + "']").classList.add("d-block");
+      if (test_step == 0) {
         document.querySelector(".step2__button_test-back").disabled = true;
       } else {
         document.querySelector(".step2__button_test-back").disabled = false;
       }
+      document.querySelector(".step2__button_green").textContent = "Следующий вопрос";
     };
   }
 }
