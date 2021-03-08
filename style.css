@@ -212,10 +212,28 @@ b {
 .answers {
   width: 50%;
 }
+.buttons-wrap {
+  overflow: hidden;
+}
+.btn-caption {
+  cursor: pointer;
+}
+.btn-caption img {
+  margin-left: 10px;
+  transition: 0.5s ease-in-out;
+}
 .btn-group {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(138px, 1fr));
   gap: 10px;
+  max-height: 0px;
+  transition: .5s ease-in-out;
+}
+.buttons-wrap_active .btn-caption img {
+  transform: rotate(180deg);
+}
+.buttons-wrap_active .btn-group {
+  max-height: 1000px;
   margin-bottom: 32px;
 }
 .btn {
@@ -2717,6 +2735,7 @@ input[type="number"] {
     margin-top: 40px;
   }
   .step2__btn-container {
+    position: relative;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2725,6 +2744,9 @@ input[type="number"] {
     -ms-flex-direction: column;
     flex-direction: column;
     margin-top: 40px;
+    width: 90vw;
+    margin-left: -45vw;
+    left: 50%;
   }
   .intensive-test__input-wrapper {
     -webkit-transform: scale(0.8);
@@ -2781,7 +2803,7 @@ input[type="number"] {
     padding: 0 30px;
   }
   .step2-start {
-    padding: 0 30px;
+    padding: 0 15px;
   }
   .intensive-test-start {
     padding: 0 30px;

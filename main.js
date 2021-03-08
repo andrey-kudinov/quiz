@@ -21,7 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".btn-choose ").forEach((el) => {
     el.onclick = function () {
       id = el.dataset.id;
-      console.log("id -", id);
       document.querySelector(".intensive-test__questions").innerHTML = "";
       getTest(id)
         .then((response) => {
@@ -42,6 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
       shuffle(data.results);
       start(data.results);
     });
+
+  document.querySelector(".btn-caption").onclick = function () {
+    document.querySelector(".buttons-wrap").classList.toggle("buttons-wrap_active");
+  };
 });
 
 function start(response) {
@@ -156,7 +159,7 @@ function start(response) {
           //         document.querySelector(".step2-end").style.display = "block";
           //     }
           // }
-          if (test_step == test.length-1 && correctAnswersCounter != test.length) {
+          if (test_step == test.length - 1 && correctAnswersCounter != test.length) {
             document.querySelector(".step2__button_green").disabled = true;
           } else {
             document.querySelector(".step2__button_green").disabled = false;
