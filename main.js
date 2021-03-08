@@ -17,6 +17,23 @@ function shuffle(array) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  let id = 0;
+  document.querySelectorAll(".btn-choose ").forEach((el) => {
+    el.onclick = function () {
+      id = el.dataset.id;
+      console.log("id -", id);
+      document.querySelector(".intensive-test__questions").innerHTML = "";
+      getTest(id)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          shuffle(data.results);
+          start(data.results);
+        });
+    };
+  });
+
   getTest(27)
     .then((response) => {
       return response.json();
@@ -25,15 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
       shuffle(data.results);
       start(data.results);
     });
-  // .then(() => );
 });
 
 function start(response) {
   let test = response;
   let test_step = 0;
   shuffle(test);
-  test = test.slice(0,5)
-  questions_step2 = test;
+  test = test.slice(0, 5);
   let answerHTML = "";
   let $class = "d-block";
   let cardClass = "intensive-puzzle__item-first_active";
@@ -126,7 +141,7 @@ function start(response) {
           // comment.classList.add("question-container__comment_true");
           // comment.innerText = 'Верно!';
           comment.classList.add("step2-question-container__comment");
-          comment.innerHTML = `<div class="step2-question-container__comment-title">Верно!</div><div class="question-container__comment-text">Вопрос категории ${test[question_id].difficulty}</div>`;
+          comment.innerHTML = `<div class="step2-question-container__comment-title">Верно!</div><div class="question-container__comment-text">Вопрос уровня ${test[question_id].difficulty}</div>`;
           question.querySelectorAll(".intensive-test__input-container").forEach(function (item, index) {
             item.classList.add("intensive-test__input-container_disable");
           });
@@ -141,7 +156,7 @@ function start(response) {
           //         document.querySelector(".step2-end").style.display = "block";
           //     }
           // }
-          if (test_step == 4 && correctAnswersCounter != 5) {
+          if (test_step == test.length-1 && correctAnswersCounter != test.length) {
             document.querySelector(".step2__button_green").disabled = true;
           } else {
             document.querySelector(".step2__button_green").disabled = false;
@@ -173,13 +188,14 @@ function start(response) {
         item.classList.add("d-none");
       });
       test_step++;
-      if (test_step == 4 && correctAnswersCounter != 5) {
+      if (test_step == test.length - 1 && correctAnswersCounter != test.length) {
         document.querySelector(".step2__button_green").disabled = true;
         document.querySelector(".step2__button_green").textContent = "Завершить тест";
       } else {
         document.querySelector(".step2__button_green").disabled = false;
       }
-      if (test_step == 5) {
+      if (test_step == test.length) {
+        document.querySelector(".btn-group").style.display = "none";
         document.querySelector(".step2-start").style.display = "none";
         document.querySelector(".step2-end").style.display = "block";
       } else {

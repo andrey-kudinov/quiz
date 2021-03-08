@@ -212,7 +212,47 @@ b {
 .answers {
   width: 50%;
 }
-
+.btn-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(138px, 1fr));
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.btn {
+  font-family: "Open Sans", sans-serif;
+  font-size: 22px;
+  width: 360px;
+  background-color: rgb(44, 153, 34);
+  color: #fff;
+  border: 0px;
+  border-radius: 3px;
+  cursor: pointer;
+  padding-top: 2px;
+}
+.btn:hover {
+  background-color: rgba(44, 153, 34, 0.844);
+}
+.btn:active,
+.btn:focus {
+  background-color: rgba(44, 153, 34);
+}
+.btn:disabled {
+  background-color: rgb(24, 105, 17);
+}
+.btn-choose,
+.btn-restart {
+  width: 100%;
+}
+.btn-restart {
+  background-color: rgb(153, 34, 34);
+}
+.btn-restart:hover {
+  background-color: rgba(153, 34, 34, 0.871);
+}
+.btn-restart:active,
+.btn-restart:focus {
+  background-color: rgb(153, 34, 34);
+}
 @media screen and (max-width: 768px) {
   .content-wrap {
     padding: 30px 0;
@@ -260,8 +300,6 @@ b {
   z-index: 10;
   padding-top: 30px;
 }
-
-
 
 input.auth-form__input::-webkit-outer-spin-button,
 input.auth-form__input::-webkit-inner-spin-button {
@@ -1089,7 +1127,7 @@ input[type="number"] {
   font-size: 32px;
   line-height: 42px;
   color: #061b36;
-  margin-bottom: 48px;
+  margin-bottom: 32px;
 }
 
 .intensive_test-item__test {
@@ -2810,9 +2848,6 @@ input[type="number"] {
     padding-bottom: 0;
     margin-bottom: 16px;
   }
-  .step3-container {
-    margin-bottom: 68px;
-  }
   .step3-footer {
     padding-top: 0px;
     border-top: none;
@@ -2998,3 +3033,4 @@ input[type="number"] {
   .content-intensive-test {
     padding: 0 24px;
   }
+}
