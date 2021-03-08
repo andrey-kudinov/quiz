@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     el.onclick = function () {
       id = el.dataset.id;
       document.querySelector(".intensive-test__questions").innerHTML = "";
+      document.querySelector(".step2-container__item-result_num").textContent = 0;
+      document.querySelector(".step2-container__progress-caption").textContent = `0%`;
+      document.querySelector(".step2-container__progress-bar_green").style.width = `0%`;
       getTest(id)
         .then((response) => {
           return response.json();
@@ -203,7 +206,7 @@ function start(response) {
         document.querySelector(".step2__button_green").disabled = false;
       }
       if (test_step == test.length) {
-        document.querySelector(".btn-group").style.display = "none";
+        document.querySelector(".buttons-wrap").style.display = "none";
         document.querySelector(".step2-start").style.display = "none";
         document.querySelector(".step2-end").style.display = "block";
       } else {
