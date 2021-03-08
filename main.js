@@ -45,6 +45,11 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelector(".btn-caption").onclick = function () {
     document.querySelector(".buttons-wrap").classList.toggle("buttons-wrap_active");
   };
+  document.addEventListener("mouseup", function (e) {
+    if (!document.querySelector(".buttons-wrap").contains(e.target)) {
+      document.querySelector(".buttons-wrap").classList.remove("buttons-wrap_active");
+    }
+  });
 });
 
 function start(response) {
